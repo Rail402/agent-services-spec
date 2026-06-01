@@ -1,0 +1,28 @@
+{
+  "version": "1.0",
+  "provider": {
+    "name": "Base Gas Oracle",
+    "wallet": "0x3333333333333333333333333333333333333333"
+  },
+  "services": [
+    {
+      "id": "base-gas-now",
+      "name": "Base Gas Now",
+      "description": "Current Base gas price snapshot. No input required.",
+      "category": "Infrastructure",
+      "endpoint": "https://gas.example.com/api/now",
+      "method": "GET",
+      "price": { "amount": "0.001", "currency": "USDC", "network": "base-sepolia" },
+      "inputSchema": { "type": "object", "properties": {}, "additionalProperties": false },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "gwei": { "type": "number" },
+          "updatedAt": { "type": "string" }
+        }
+      },
+      "exampleRequest": {},
+      "exampleResponse": { "gwei": 0.012, "updatedAt": "2026-06-01T00:00:00Z" }
+    }
+  ]
+}

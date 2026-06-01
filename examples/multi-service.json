@@ -1,0 +1,55 @@
+{
+  "version": "1.0",
+  "provider": {
+    "name": "Rail402 Demo Provider",
+    "url": "https://rail402.app",
+    "wallet": "0x2DDa6521fCEC003CB5506e2A6578faf87417191a"
+  },
+  "services": [
+    {
+      "id": "token-analytics",
+      "name": "Token Analytics",
+      "description": "Holder stats, liquidity, price/volume, social mentions, and candlestick signals for a Base token.",
+      "category": "Analytics",
+      "tags": ["token", "analytics", "base", "defi"],
+      "endpoint": "https://rail402.app/api/token-detail",
+      "method": "GET",
+      "price": { "amount": "0.05", "currency": "USDC", "network": "base" },
+      "inputSchema": {
+        "type": "object",
+        "required": ["address"],
+        "properties": {
+          "address": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" },
+          "chain": { "type": "string" }
+        }
+      },
+      "outputSchema": { "type": "object", "additionalProperties": true },
+      "exampleRequest": { "address": "0x1bc0c42215582d5a085795f4badbac3ff36d1bcb", "chain": "base" },
+      "exampleResponse": { "code": 0, "message": "success", "data": { "holder_stats": {} } }
+    },
+    {
+      "id": "sentiment-summary",
+      "name": "Sentiment Summary",
+      "description": "Summarizes recent social sentiment for a ticker.",
+      "category": "Data",
+      "tags": ["sentiment", "social"],
+      "endpoint": "https://rail402.app/api/sentiment",
+      "method": "POST",
+      "price": { "amount": "0.02", "currency": "USDC", "network": "base" },
+      "inputSchema": {
+        "type": "object",
+        "required": ["ticker"],
+        "properties": { "ticker": { "type": "string" } }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "sentiment": { "type": "string" },
+          "confidence": { "type": "number" }
+        }
+      },
+      "exampleRequest": { "ticker": "CLANKER" },
+      "exampleResponse": { "sentiment": "bullish", "confidence": 0.78 }
+    }
+  ]
+}

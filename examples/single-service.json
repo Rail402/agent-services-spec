@@ -1,0 +1,39 @@
+{
+  "version": "1.0",
+  "provider": {
+    "name": "Acme Risk Labs",
+    "url": "https://acme-risk.example.com",
+    "wallet": "0x1111111111111111111111111111111111111111",
+    "contact": "agents@acme-risk.example.com"
+  },
+  "services": [
+    {
+      "id": "wallet-risk-score",
+      "name": "Wallet Risk Score",
+      "description": "Returns a 0-1 risk score for an EVM wallet address based on on-chain behavior.",
+      "category": "Security",
+      "tags": ["wallet", "risk", "security"],
+      "endpoint": "https://acme-risk.example.com/api/risk",
+      "method": "POST",
+      "auth": "x402",
+      "price": { "amount": "0.05", "currency": "USDC", "network": "base" },
+      "inputSchema": {
+        "type": "object",
+        "required": ["address"],
+        "properties": {
+          "address": { "type": "string", "pattern": "^0x[a-fA-F0-9]{40}$" }
+        }
+      },
+      "outputSchema": {
+        "type": "object",
+        "properties": {
+          "score": { "type": "number" },
+          "label": { "type": "string" }
+        }
+      },
+      "exampleRequest": { "address": "0xabc0000000000000000000000000000000000001" },
+      "exampleResponse": { "score": 0.92, "label": "high" },
+      "documentation": "Pass a checksummed or lowercase EVM address. Score >= 0.8 indicates elevated risk."
+    }
+  ]
+}
