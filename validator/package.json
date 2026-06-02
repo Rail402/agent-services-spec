@@ -8,6 +8,9 @@
   "main": "./dist/validate.js",
   "types": "./dist/validate.d.ts",
   "files": ["dist", "README.md"],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsup src/cli.ts src/validate.ts --format esm --dts --clean",
     "test": "vitest run",
